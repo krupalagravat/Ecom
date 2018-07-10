@@ -35,6 +35,8 @@ import com.allandroidprojects.ecomsample.startup.MainActivity;
 import com.allandroidprojects.ecomsample.utility.ImageUrlUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.List;
+
 
 public class ImageListFragment extends Fragment {
 
@@ -66,20 +68,23 @@ public class ImageListFragment extends Fragment {
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
         }*/
-        String[] items=null;
+        List<CartItem> items = null;
         if (ImageListFragment.this.getArguments().getInt("type") == 1){
-            items =ImageUrlUtils.getOffersUrls();
+        items = ImageUrlUtils.getOffersUrls();
         }else if (ImageListFragment.this.getArguments().getInt("type") == 2){
             items =ImageUrlUtils.getElectronicsUrls();
-        }else if (ImageListFragment.this.getArguments().getInt("type") == 3){
-            items =ImageUrlUtils.getLifeStyleUrls();
-        }else if (ImageListFragment.this.getArguments().getInt("type") == 4){
-            items =ImageUrlUtils.getHomeApplianceUrls();
-        }else if (ImageListFragment.this.getArguments().getInt("type") == 5){
-            items =ImageUrlUtils.getBooksUrls();
         }else {
-            items = ImageUrlUtils.getImageUrls();
+            items = ImageUrlUtils.getOffersUrls();
         }
+// else if (ImageListFragment.this.getArguments().getInt("type") == 3){
+//            items =ImageUrlUtils.getLifeStyleUrls();
+//        }else if (ImageListFragment.this.getArguments().getInt("type") == 4){
+//            items =ImageUrlUtils.getHomeApplianceUrls();
+//        }else if (ImageListFragment.this.getArguments().getInt("type") == 5){
+//            items =ImageUrlUtils.getBooksUrls();
+//        }else {
+//            items = ImageUrlUtils.getImageUrls();
+//        }
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(recyclerView, items));
@@ -88,25 +93,10 @@ public class ImageListFragment extends Fragment {
     public static class SimpleStringRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
 
-        private String[] mValues;
+        private List<CartItem> mValues;
         private RecyclerView mRecyclerView;
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final SimpleDraweeView mImageView;
-            public final LinearLayout mLayoutItem;
-            public final ImageView mImageViewWishlist;
-
-            public ViewHolder(View view) {
-                super(view);
-                mView = view;
-                mImageView = (SimpleDraweeView) view.findViewById(R.id.image1);
-                mLayoutItem = (LinearLayout) view.findViewById(R.id.layout_item);
-                mImageViewWishlist = (ImageView) view.findViewById(R.id.ic_wishlist);
-            }
-        }
-
-        public SimpleStringRecyclerViewAdapter(RecyclerView recyclerView, String[] items) {
+        public SimpleStringRecyclerViewAdapter(RecyclerView recyclerView, List<CartItem> items) {
             mValues = items;
             mRecyclerView = recyclerView;
         }
@@ -138,28 +128,42 @@ public class ImageListFragment extends Fragment {
             } else {
                 layoutParams.height = 800;
             }*/
-            final Uri uri = Uri.parse(mValues[position]);
+            final Uri uri = Uri.parse(mValues.get(position).getImgeURl());
             holder.mImageView.setImageURI(uri);
             holder.mLayoutItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mActivity, ItemDetailsActivity.class);
-                    intent.putExtra(STRING_IMAGE_URI, mValues[position]);
+                    intent.putExtra(STRING_IMAGE_URI, mValues.get(position).getImgeURl());
                     intent.putExtra(STRING_IMAGE_POSITION, position);
                     mActivity.startActivity(intent);
 
                 }
             });
+            ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
+            if(mValues.get(position).isFav()){
+                holder.mImageViewWishlist.setImageResource(R.drawable.ic_favorite_black_18dp);
+                imageUrlUtils.addWishlistImageUri(mValues.get(position).getImgeURl());
+            }else {
+                holder.mImageViewWishlist.setImageResource(R.drawable.ic_favorite_border_black_18dp);
+            }
 
             //Set click action for wishlist
             holder.mImageViewWishlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
-                    imageUrlUtils.addWishlistImageUri(mValues[position]);
-                    holder.mImageViewWishlist.setImageResource(R.drawable.ic_favorite_black_18dp);
+                    if(mValues.get(position).isFav()){
+                        imageUrlUtils.addWishlistImageUri(mValues.get(position).getImgeURl());
+                        holder.mImageViewWishlist.setImageResource(R.drawable.ic_favorite_black_18dp);
+                        Toast.makeText(mActivity, "Item added to wishlist.", Toast.LENGTH_SHORT).show();
+                    }else {
+                        holder.mImageViewWishlist.setImageResource(R.drawable.ic_favorite_border_black_18dp);
+                    }
+
+                    mValues.set(position, new CartItem(mValues.get(position).getImgeURl(), !mValues.get(position).isFav()));
                     notifyDataSetChanged();
-                    Toast.makeText(mActivity,"Item added to wishlist.",Toast.LENGTH_SHORT).show();
+
 
                 }
             });
@@ -168,7 +172,22 @@ public class ImageListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return mValues.length;
+            return mValues.size();
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final SimpleDraweeView mImageView;
+            public final LinearLayout mLayoutItem;
+            public final ImageView mImageViewWishlist;
+
+            public ViewHolder(View view) {
+                super(view);
+                mView = view;
+                mImageView = (SimpleDraweeView) view.findViewById(R.id.image1);
+                mLayoutItem = (LinearLayout) view.findViewById(R.id.layout_item);
+                mImageViewWishlist = (ImageView) view.findViewById(R.id.ic_wishlist);
+            }
         }
     }
 }

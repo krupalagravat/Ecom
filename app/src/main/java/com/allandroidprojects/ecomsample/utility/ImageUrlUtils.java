@@ -1,5 +1,7 @@
 package com.allandroidprojects.ecomsample.utility;
 
+import com.allandroidprojects.ecomsample.fragments.CartItem;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +12,7 @@ public class ImageUrlUtils {
     static ArrayList<String> cartListImageUri = new ArrayList<>();
 
     public static String[] getImageUrls() {
-        String[] urls = new String[] {
+        String[] urls = new String[]{
                 "https://static.pexels.com/photos/5854/sea-woman-legs-water-medium.jpg",
                 "https://static.pexels.com/photos/6245/kitchen-cooking-interior-decor-medium.jpg",
                 "https://static.pexels.com/photos/6770/light-road-lights-night-medium.jpg",
@@ -121,23 +123,22 @@ public class ImageUrlUtils {
         return urls;
     }
 
-    public static String[] getOffersUrls() {
-        String[] urls = new String[]{
-                "https://static.pexels.com/photos/1543/landscape-nature-man-person-medium.jpg",
-                "https://static.pexels.com/photos/211048/pexels-photo-211048-medium.jpeg",
-                "https://static.pexels.com/photos/1778/numbers-time-watch-white-medium.jpg",
-                "https://static.pexels.com/photos/111147/pexels-photo-111147-medium.jpeg",
-                "https://static.pexels.com/photos/2713/wall-home-deer-medium.jpg",
-                "https://static.pexels.com/photos/168575/pexels-photo-168575-medium.jpeg",
-                "https://static.pexels.com/photos/213384/pexels-photo-213384-medium.jpeg",
-                "https://static.pexels.com/photos/67442/pexels-photo-67442-medium.jpeg",
-                "https://static.pexels.com/photos/159494/book-glasses-read-study-159494-medium.jpeg",
-                "https://static.pexels.com/photos/1543/landscape-nature-man-person-medium.jpg",
-                "https://static.pexels.com/photos/211048/pexels-photo-211048-medium.jpeg",
-                "https://static.pexels.com/photos/2713/wall-home-deer-medium.jpg",
-                "https://static.pexels.com/photos/177143/pexels-photo-177143-medium.jpeg",
-                "https://static.pexels.com/photos/106936/pexels-photo-106936-medium.jpeg"
-        };
+    public static ArrayList<CartItem> getOffersUrls() {
+
+        ArrayList<CartItem> urls = new ArrayList<>();
+        urls.add(new CartItem("https://static.pexels.com/photos/1543/landscape-nature-man-person-medium.jpg", true));
+        urls.add(new CartItem("https://static.pexels.com/photos/211048/pexels-photo-211048-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/1778/numbers-time-watch-white-medium.jpg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/111147/pexels-photo-111147-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/2713/wall-home-deer-medium.jpg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/168575/pexels-photo-168575-medium.jpeg", true));
+        urls.add(new CartItem("https://static.pexels.com/photos/67442/pexels-photo-67442-medium.jpeg", true));
+        urls.add(new CartItem("https://static.pexels.com/photos/159494/book-glasses-read-study-159494-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/1543/landscape-nature-man-person-medium.jpg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/211048/pexels-photo-211048-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/2713/wall-home-deer-medium.jpg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/177143/pexels-photo-177143-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/106936/pexels-photo-106936-medium.jpeg", false));
         return urls;
     }
 
@@ -163,25 +164,24 @@ public class ImageUrlUtils {
         return urls;
     }
 
-    public static String[] getElectronicsUrls() {
-        String[] urls = new String[]{
-                "https://static.pexels.com/photos/204611/pexels-photo-204611-medium.jpeg",
-                "https://static.pexels.com/photos/214487/pexels-photo-214487-medium.jpeg",
-                "https://static.pexels.com/photos/168575/pexels-photo-168575-medium.jpeg",
-                "https://static.pexels.com/photos/213384/pexels-photo-213384-medium.jpeg",
-                "https://static.pexels.com/photos/114907/pexels-photo-114907-medium.jpeg",
-                "https://static.pexels.com/photos/185030/pexels-photo-185030-medium.jpeg",
-                "https://static.pexels.com/photos/133579/pexels-photo-133579-medium.jpeg",
-                "https://static.pexels.com/photos/51383/photo-camera-subject-photographer-51383-medium.jpeg",
-                "https://static.pexels.com/photos/205926/pexels-photo-205926-medium.jpeg",
-                "https://static.pexels.com/photos/2396/light-glass-lamp-idea-medium.jpg",
-                "https://static.pexels.com/photos/1854/person-woman-hand-relaxing-medium.jpg",
-                "https://static.pexels.com/photos/204611/pexels-photo-204611-medium.jpeg",
-                "https://static.pexels.com/photos/214487/pexels-photo-214487-medium.jpeg",
-                "https://static.pexels.com/photos/168575/pexels-photo-168575-medium.jpeg",
-                "https://static.pexels.com/photos/213384/pexels-photo-213384-medium.jpeg",
-                "https://static.pexels.com/photos/114907/pexels-photo-114907-medium.jpeg"
-        };
+    public static ArrayList<CartItem> getElectronicsUrls() {
+        ArrayList<CartItem> urls = new ArrayList<>();
+        urls.add(new CartItem("https://static.pexels.com/photos/204611/pexels-photo-204611-medium.jpeg", true));
+        urls.add(new CartItem("https://static.pexels.com/photos/214487/pexels-photo-214487-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/168575/pexels-photo-168575-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/213384/pexels-photo-213384-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/114907/pexels-photo-114907-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/185030/pexels-photo-185030-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/133579/pexels-photo-133579-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/51383/photo-camera-subject-photographer-51383-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/205926/pexels-photo-205926-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/2396/light-glass-lamp-idea-medium.jpg", true));
+        urls.add(new CartItem("https://static.pexels.com/photos/1854/person-woman-hand-relaxing-medium.jpg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/204611/pexels-photo-204611-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/214487/pexels-photo-214487-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/168575/pexels-photo-168575-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/213384/pexels-photo-213384-medium.jpeg", false));
+        urls.add(new CartItem("https://static.pexels.com/photos/114907/pexels-photo-114907-medium.jpeg", false));
         return urls;
     }
 
@@ -231,23 +231,27 @@ public class ImageUrlUtils {
 
     // Methods for Wishlist
     public void addWishlistImageUri(String wishlistImageUri) {
-        this.wishlistImageUri.add(0,wishlistImageUri);
+        this.wishlistImageUri.add(0, wishlistImageUri);
     }
 
     public void removeWishlistImageUri(int position) {
         this.wishlistImageUri.remove(position);
     }
 
-    public ArrayList<String> getWishlistImageUri(){ return this.wishlistImageUri; }
+    public ArrayList<String> getWishlistImageUri() {
+        return this.wishlistImageUri;
+    }
 
     // Methods for Cart
     public void addCartListImageUri(String wishlistImageUri) {
-        this.cartListImageUri.add(0,wishlistImageUri);
+        this.cartListImageUri.add(0, wishlistImageUri);
     }
 
     public void removeCartListImageUri(int position) {
         this.cartListImageUri.remove(position);
     }
 
-    public ArrayList<String> getCartListImageUri(){ return this.cartListImageUri; }
+    public ArrayList<String> getCartListImageUri() {
+        return this.cartListImageUri;
+    }
 }
